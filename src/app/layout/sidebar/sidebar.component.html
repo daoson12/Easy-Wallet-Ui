@@ -1,0 +1,100 @@
+<!-- SIDEBAR  -->
+<div class="sidebar">
+    <div class="scrollbar-inner sidebar-wrapper">
+
+        <div class="user">
+            <div class="photo">
+                <img src="assets/img/profile2.jpg">
+            </div>
+            <div class="info">
+                <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                    <span>
+             victor
+              <span class="user-level">1213913971379 </span>
+                    <span class="caret"></span>
+                    </span>
+                </a>
+                <div class="clearfix"></div>
+                <div class="collapse in" id="collapseExample" aria-expanded="true">
+                    <ul class="nav">
+                        <li>
+                            <a routerLink="profile">
+                                <span class="link-collapse">My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="edit-profile">
+                                <span class="link-collapse">Edit Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#settings">
+                                <span class="link-collapse">Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <ul class="nav">
+            <li class="nav-item active">
+                <a routerLink="/home">
+                    <i class="fa fa-th "></i>
+                    <p>Dashboard</p>
+                    <span class="badge badge-count ">5</span>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a routerLink="/home/deposit">
+                    <i class="fa fa-university "></i>
+                    <p>Deposit</p>
+                    <span class="badge badge-count ">50</span>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a routerLink="withdrawal">
+                    <i class="fa fa-money "></i>
+                    <p>Withdraw</p>
+                    <span class="badge badge-count ">6</span>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a routerLink="/home/transfer">
+                    <i class="fa fa-credit-card-alt "></i>
+                    <p>Transfer</p>
+                    <span class="badge badge-count ">6</span>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a routerLink="/home/transactions">
+                    <i class="fa fa-exchange "></i>
+                    <p>Transactions</p>
+                    <span class="badge badge-success ">3</span>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a routerLink="/home/buy-airtime-data">
+                    <i class="fa fa-font "></i>
+                    <p>Buy Airtime/Data</p>
+                    <span class="badge badge-danger ">25</span>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a [routerLink]="['/home/referrals']" routerLinkActive="router-link-active">
+                    <i class="fa fa-users "></i>
+                    <p>Referrals</p>
+                    <span class="badge badge-danger ">25</span>
+                </a>
+            </li>
+
+            <!-- <li class="nav-item update-pro ">
+          <button data-toggle="modal " data-target="#modalUpdate ">
+            <i class="fa fa-hand-pointer-o "></i>
+            <p>Update To Pro</p>
+          </button>
+        </li> -->
+        </ul>
+
+    </div>
+</div>

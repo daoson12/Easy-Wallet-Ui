@@ -1,0 +1,16 @@
+.table {
+    border-top: 2px solid #31b1a4;
+    background: #fff;
+    border-radius: 0px 0px 5px 5px;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 3px 0px #b3b3b3;
+    transition: box-shadow 0.2s linear;
+}
+
+.tableHead {
+    background: #31b1a4;
+}
+
+.tableHead th {
+    color: white;
+}

@@ -119,6 +119,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "easywallet-ui"
+    }
+  },
+  "defaultProject": "easywallet-ui",
+  "schematics": {
+    "@schematics/angular:component": {
+      "skipTests": true
+    }
+  }
 }
