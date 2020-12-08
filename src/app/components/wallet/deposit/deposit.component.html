@@ -11,17 +11,17 @@
 <div class="dataForm">
     <form>
         <label for="paymentMethod" class="inputLabel">Payment Method</label>
-        <select id="paymentMethod" class="input" name="paymentMethod">
+        <select id="paymentMethod" class="input" name="paymentMethod" [(ngModel)]="paymentMethod">
         <option selected value="">Select Payment Method</option>
         <option value="Card">ATM Card or Bank</option>
         <!-- ... -->
       </select>
         <br /><br>
         <label for="paymentMethod" class="inputLabel">Amount</label>
-        <input type="text" name="uvt" class="input" placeholder="Enter Amount (&#8358;500, Min)" name="depositAmount" /><br><br>
+        <input type="text" name="uvt" class="input" placeholder="Enter Amount (&#8358;500, Min)" name="depositAmount" [(ngModel)]="depositAmount" /><br><br>
         <label for="paymentMethod" class="inputLabel">My Wallet Pin</label>
-        <input type="text" name="uvt" class="input" placeholder="PIN" name="pin" />
-        <button name="" id="submit">
+        <input type="text" name="uvt" class="input" placeholder="PIN" name="pin" [(ngModel)]="pin" />
+        <button name="" id="submit" (click)="makeDeposit()">
         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="shield-alt"
           class="svg-inline--fa fa-shield-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
           width="20px" height="20px">
@@ -50,14 +50,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>29/november/2020</td>
-                <td>customer service</td>
-                <td>recharge the card of 12.....</td>
-                <td>12,0000</td>
-                <td>12</td>
-                <td>pending</td>
+            <tr *ngFor="let list of WalletTransaction.slice().reverse();let i=index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{list.dateCreated | date}}</td>
+                <td>{{list.service}}</td>
+                <td>{{list.description}}</td>
+                <td>{{list.amount}}</td>
+                <td>{{list.serviceCharge}}</td>
+                <td>{{list.status}}</td>
             </tr>
         </tbody>
     </table>

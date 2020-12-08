@@ -9,8 +9,8 @@
             <div class="info">
                 <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                     <span>
-             victor
-              <span class="user-level">1213913971379 </span>
+                        {{loggedInUser?.username}}
+              <span class="user-level">{{loggedInUser?.walletAccount?.accountNumber}} </span>
                     <span class="caret"></span>
                     </span>
                 </a>
@@ -39,14 +39,14 @@
 
         <ul class="nav">
             <li class="nav-item active">
-                <a routerLink="/home">
+                <a routerLink="/">
                     <i class="fa fa-th "></i>
                     <p>Dashboard</p>
                     <span class="badge badge-count ">5</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a routerLink="/home/deposit">
+                <a routerLink="deposit">
                     <i class="fa fa-university "></i>
                     <p>Deposit</p>
                     <span class="badge badge-count ">50</span>
@@ -60,28 +60,28 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a routerLink="/home/transfer">
+                <a routerLink="transfer">
                     <i class="fa fa-credit-card-alt "></i>
                     <p>Transfer</p>
                     <span class="badge badge-count ">6</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a routerLink="/home/transactions">
+                <a routerLink="transactions">
                     <i class="fa fa-exchange "></i>
                     <p>Transactions</p>
                     <span class="badge badge-success ">3</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a routerLink="/home/buy-airtime-data">
+                <a routerLink="buy-airtime-data">
                     <i class="fa fa-font "></i>
                     <p>Buy Airtime/Data</p>
                     <span class="badge badge-danger ">25</span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a [routerLink]="['/home/referrals']" routerLinkActive="router-link-active">
+                <a [routerLink]="['referrals']" routerLinkActive="router-link-active">
                     <i class="fa fa-users "></i>
                     <p>Referrals</p>
                     <span class="badge badge-danger ">25</span>

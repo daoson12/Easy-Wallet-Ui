@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidatorsService } from './../validator/custom-validators.service';
+import { SecurityServiceService } from './../service/security-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +12,7 @@ import { CustomValidatorsService } from './../validator/custom-validators.servic
 export class SignUpComponent implements OnInit {
 registerForm:any=FormGroup;
 submitted=false;
-  constructor(private formBuilder:FormBuilder,private customValidator:CustomValidatorsService) { }
+  constructor(private formBuilder:FormBuilder,private customValidator:CustomValidatorsService, private service:SecurityServiceService, private router:Router) { }
 
   ngOnInit() {
     this.registerForm=this.formBuilder.group({
@@ -29,12 +31,18 @@ submitted=false;
   get f() { return this.registerForm.controls; }
 
   register():any {
+    
     this.submitted=true;
     if(this.registerForm.invalid){
       return;
     }
-    console.log(this.registerForm.value);
-
+    this.service.registerUser(this.registerForm.value).subscribe(result=>{
+      this.router.navigate(["/login"])
+      console.log(result)
+     
+    },
+    err=>console.log(err)
+    )
 
     }
 }

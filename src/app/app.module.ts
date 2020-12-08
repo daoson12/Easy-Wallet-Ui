@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -11,6 +13,10 @@ import { HomeComponent } from './layout/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './security/login/login.component';
 import { SignUpComponent } from './security/sign-up/sign-up.component';
+import { AuthGuard } from './security/helper/auth.guard';
+import { NotAuthGuard } from './security/helper/notAuth.guard';
+import { AuthInterceptor } from './security/helper/auth.interceptor';
+import { CustomValidatorsService } from './security/validator/custom-validators.service';
 
 
 @NgModule({
@@ -23,17 +29,17 @@ import { SignUpComponent } from './security/sign-up/sign-up.component';
     HomeComponent,
     LoginComponent,
     SignUpComponent,
-    
-   
-   
   ],
   imports: [
-    BrowserModule,
+
+
+  BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AuthGuard,NotAuthGuard,CustomValidatorsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

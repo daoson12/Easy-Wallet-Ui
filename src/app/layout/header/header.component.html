@@ -1,4 +1,4 @@
-<div class="main-header">
+<div class="main-header" *ngIf="session.getToken()">
     <div class="logo-header">
         <a href="index.html" class="logo">
             Easy<span style="color: #31b1a4;">Wallet</span>
@@ -22,8 +22,6 @@
                     </div>
                 </div>
             </form>
-
-
 
             <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                 <li>
@@ -99,40 +97,35 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="assets/img/profile2.jpg" alt="user-img" width="36" class="img-circle"><span>Daoson12</span>
+                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="assets/img/profile2.jpg" alt="user-img" width="36" class="img-circle"><span>{{loggedInUser?.username}}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>
                             <div class="user-box">
                                 <div class="u-img"><img src="assets/img/profile2.jpg" alt="user"></div>
                                 <div class="u-text">
-                                    <h4>Daoson12</h4>
-                                    <p class="text-muted">daoson12@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-sm" style="background: #31b1a4; color: white;">View Profile</a>
+                                    <h4>{{loggedInUser?.username}}</h4>
+                                    <p class="text-muted">{{loggedInUser?.email}}</p><a href="profile.html" class="btn btn-rounded btn-sm" style="background: #31b1a4; color: white;">View Profile</a>
                                 </div>
                             </div>
                         </li>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#"><i class="fa fa-user"></i> My Profile</a>
                         <a class="dropdown-item" href="#"><i class="fa fa-money"></i> My Balance
-                <span
-                  style="background: #31b1a4; border: 1px solid white;padding: 5px; color:white">182738974012387023</span></a>
+                         <span style="background: #31b1a4; border: 1px solid white;padding: 5px; color:white">182738974012387023</span></a>
                         <a class="dropdown-item" href="#"><i class="fa fa-envelope"></i> Inbox</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#"><i class="fa fa-cogs"></i> Account Setting</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                        <a class="dropdown-item" (click)="logout()"><i class="fa fa-power-off"></i> Logout</a>
                     </ul>
                 </li>
-
-                <li>
+                <!-- <li>
                     <button type="button" class="btn btn-sm ml-2 " style="background: #e1ecf4;border:1px solid #7aa7c7;" (click)="gotoLogin()">Login</button>
-                    <button type="button" class="btn btn-secondary btn-sm ml-2 " style="background: #31b1a4; border: 1px solid #66c0ff; " (click)="gotoSignup()">Sign Up</button>
-                </li>
-
+                    <button type="button" class="btn btn-secondary btn-sm ml-2 " style="background: #31b1a4; border: 1px solid #66c0ff;" (click)="gotoSignup()">Sign Up</button>
+                </li> -->
             </ul>
         </div>
     </nav>
-
-
 
 </div>
