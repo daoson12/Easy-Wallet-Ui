@@ -18,7 +18,7 @@ WalletTransaction: any = [];
 constructor(private walletService: WalletService,) { }
 
   ngOnInit(){
-   this.getAllDepositLogs()
+   this.  getAllWithdrawalLogs()
   }
 
   makeDeposit(){
@@ -32,10 +32,9 @@ constructor(private walletService: WalletService,) { }
     console.log(res);      
     })
   }
-  getAllDepositLogs(){
+  getAllWithdrawalLogs(){
   this.walletService.getAllLogs().subscribe((res:any)=>{
     console.log(res);
-  
       this.WalletTransaction = res.filter((x: any) => x.userId.id === this.loggedInUser.id && x.service === "Deposit");
       console.log(this.WalletTransaction);
   })

@@ -13,6 +13,8 @@ export class DashboardComponent implements OnInit {
   loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser') || '{}');
   userBalance: any ;
   userLastDeposit:any;
+  LastWithrawal:any;
+
   constructor( public walletService:WalletService) { }
   ngOnInit() {
     this.loggedInUser
@@ -23,6 +25,7 @@ export class DashboardComponent implements OnInit {
     var userId = this.loggedInUser.id
     this.walletService.getAccountBalance(userId).subscribe((res: any) => {
       console.log(res);
+      // this.LastWithrawal=res.data.
       this.userBalance = res.data.accountBalance
       this.userLastDeposit=res.data.lastDeposit
 

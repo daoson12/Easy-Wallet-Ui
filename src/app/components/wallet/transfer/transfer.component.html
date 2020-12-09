@@ -10,58 +10,58 @@
 
         <div class="col-sm-6 col-md-6 col-lg-6">
 
-            <div class="acctBtn" (click)="openTransferAccount()">
-                <input />
-                <button>Go</button>
+            <div class="acctBtn">
+                <input type="text" name="recipientAcctNo" [(ngModel)]="accountNo" />
+                <button (click)=" openTransferAccount() ">Go</button>
             </div>
 
-            <div class="dataForm mt-4" *ngIf="hideForm">
+            <div class="dataForm mt-4 " *ngIf="hideForm ">
                 <form>
-                    <label for="paymentMethod" class="inputLabel">Account No:</label>
-                    <input type="text" name="uvt" class="input" disabled/>
+                    <label for="paymentMethod " class="inputLabel ">Account No:</label>
+                    <input type="text " name="uvt " class="input " value="{{recipient?.walletAccountId?.accountNumber}}" disabled/>
 
                     <br /><br>
-                    <label for="paymentMethod" class="inputLabel">Amount</label>
-                    <input type="text" name="uvt" class="input" placeholder="Enter Amount (&#8358;500, Min)" name="depositAmount" /><br><br>
-                    <label for="paymentMethod" class="inputLabel">My Wallet Pin</label>
-                    <input type="text" name="uvt" class="input" placeholder="PIN" name="pin" />
-                    <button type="button" class="btn btn-sm btn-block mt-2" style="background-color: #45b8ac;">Transfer</button>
+                    <label for="paymentMethod " class="inputLabel ">Amount</label>
+                    <input type="text " name="uvt " class="input " placeholder="Enter Amount (&#8358;500, Min) " [(ngModel)]="amountToTransfer" name="amountToTransfer " /><br><br>
+                    <label for="paymentMethod " class="inputLabel ">My Wallet Pin</label>
+                    <input type="text " name="uvt " class="input " placeholder="PIN " name="pin " [(ngModel)]="transactionPin" name="transactionPin " />
+                    <button type="button " class="btn btn-sm btn-block mt-2 " style="background-color: #4f8e87; " (click)="transfer()">Transfer</button>
                 </form>
 
             </div>
 
         </div>
 
-        <div class="col-sm-6 col-md-6 col-lg-6 display">
-            <div class="widget widget-reminder">
-                <div class="widget-reminder-header"> FROM:</div>
-                <div class="widget-reminder-container">
-                    <div class="widget-reminder-time">
+        <div class="col-sm-6 col-md-6 col-lg-6 display ">
+            <div class="widget widget-reminder ">
+                <div class="widget-reminder-header "> FROM:</div>
+                <div class="widget-reminder-container ">
+                    <div class="widget-reminder-time ">
                         NOV 4 09:00<br /> 12:00
                     </div>
-                    <div class="widget-reminder-divider bg-success"></div>
-                    <div class="widget-reminder-content">
-                        <h4 class="widget-title">Dinner with Richard</h4>
-                        <div class="widget-desc"><i class="fa fa-envelope"></i> daoduvictor@gmail.com</div>
-                        <div class="widget-desc"><i class="fa fa-phone"></i> +234 9021 489 349</div>
-                        <div class="widget-desc"><i class="fa fa-map-pin"></i> No 1 Beach Road Jos</div>
-                        <h4 class="widget-title">Account Number :<span>37498723897</span></h4>
+                    <div class="widget-reminder-divider bg-success "></div>
+                    <div class="widget-reminder-content ">
+                        <h4 class="widget-title ">Dinner with Richard</h4>
+                        <div class="widget-desc "><i class="fa fa-envelope "></i> daoduvictor@gmail.com</div>
+                        <div class="widget-desc "><i class="fa fa-phone "></i> +234 9021 489 349</div>
+                        <div class="widget-desc "><i class="fa fa-map-pin "></i> No 1 Beach Road Jos</div>
+                        <h4 class="widget-title ">Account Number :<span>37498723897</span></h4>
                     </div>
                 </div>
             </div>
-            <div class="widget widget-reminder">
-                <div class="widget-reminder-header"> TO:</div>
-                <div class="widget-reminder-container">
-                    <div class="widget-reminder-time">
-                        NOV 4 09:00<br /> 12:00
+            <div class="widget widget-reminder " *ngIf="hideForm ">
+                <div class="widget-reminder-header "> TO:</div>
+                <div class="widget-reminder-container ">
+                    <div class="widget-reminder-time ">
+                        {{currentTime | date}}<br /> 12:00
                     </div>
-                    <div class="widget-reminder-divider bg-danger"></div>
-                    <div class="widget-reminder-content">
-                        <h4 class="widget-title">Dinner with Richard</h4>
-                        <div class="widget-desc"><i class="fa fa-envelope"></i> daoduvictor@gmail.com</div>
-                        <div class="widget-desc"><i class="fa fa-phone"></i> +234 9021 489 349</div>
-                        <div class="widget-desc"><i class="fa fa-map-pin"></i> No 1 Beach Road Jos</div>
-                        <h4 class="widget-title">Account Number :<span>37498723897</span></h4>
+                    <div class="widget-reminder-divider bg-danger "></div>
+                    <div class="widget-reminder-content ">
+                        <h4 class="widget-title ">{{recipient?.lastName | uppercase}} {{recipient?.firstName}}</h4>
+                        <div class="widget-desc "><i class="fa fa-envelope "></i> {{recipient?.email}}</div>
+                        <div class="widget-desc "><i class="fa fa-phone "></i> {{recipient?.phone}}</div>
+                        <!-- <div class="widget-desc "><i class="fa fa-map-pin "></i> No 1 Beach Road Jos</div> -->
+                        <h4 class="widget-title ">Account Number :<span>{{recipient?.walletAccountId?.accountNumber}}</span></h4>
                     </div>
                 </div>
             </div>

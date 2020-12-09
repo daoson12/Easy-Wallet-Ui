@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WalletService } from './../wallet.service';
 
 @Component({
   selector: 'app-withdrawal',
@@ -7,9 +8,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WithdrawalComponent implements OnInit {
 
-  constructor() { }
+  constructor(private walletService:WalletService) { }
+  WalletTransaction:any=[];
+  loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser') || '{}');
+  amountToWithdraw: any;
+  transactionPin:any;
+  paymentMethod:any;
+ 
 
-  ngOnInit(): void {
+  ngOnInit(){
+    this.getAllDepositLogs()
   }
 
+withdrawal(){
+  var paymentMethod= this.paymentMethod;
+  var amountToWithdraw= this.amountToWithdraw;
+  var transactionPin =this.transactionPin
+  var userId= this.loggedInUser.id
+  console.log(`PaymentMethod= ${paymentMethod} \nAmount= ${amountToWithdraw} \npin= ${transactionPin} \nUserId= ${userId}`);
+  this.walletService.withdraw(paymentMethod, amountToWithdraw, transactionPin, userId).subscribe((res:any)=>{
+    console.log(res);
+  })
 }
+
+getAllDepositLogs(){
+  this.walletService.getAllLogs().subscribe((res:any)=>{
+    console.log(res);
+      this.WalletTransaction = res.filter((x: any) => x.userId.id === this.loggedInUser.id && x.service === "Withdrawal");
+      console.log(this.WalletTransaction);
+  })
+  }
+}
+

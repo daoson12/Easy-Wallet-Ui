@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,8 @@ import { AuthGuard } from './security/helper/auth.guard';
 import { NotAuthGuard } from './security/helper/notAuth.guard';
 import { AuthInterceptor } from './security/helper/auth.interceptor';
 import { CustomValidatorsService } from './security/validator/custom-validators.service';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -31,13 +33,14 @@ import { CustomValidatorsService } from './security/validator/custom-validators.
     SignUpComponent,
   ],
   imports: [
-
-
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
+    ToastrModule.forRoot()
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, AuthGuard,NotAuthGuard,CustomValidatorsService],
   bootstrap: [AppComponent]

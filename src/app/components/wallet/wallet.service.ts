@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class WalletService {
 
+
   baseURL:String='/wallet/'
   getAllDepositLog
   constructor(private http:HttpClient) { }
@@ -23,10 +24,18 @@ export class WalletService {
   }
 
   withdraw(paymentMethod: any, amountToWithdraw: any, transactionPin: any, userId: any) {
-    return this.http.post(`${this.baseURL}/withdraw?&paymentMethod=${paymentMethod}&amountToWithdraw=${amountToWithdraw}
+    return this.http.post(`${this.baseURL}withdraw?paymentMethod=${paymentMethod}&amountToWithdraw=${amountToWithdraw}
     &transactionPin=${transactionPin}&userId=${userId}`, {})
     
   }
 
+  transfer(userId: any, recipientUserId: any, recipientAcctNo: any, amountToTransfer: any, transactionPin: any):any {
+    return this.http.post(`${this.baseURL}transfer?userId=${userId}&recipientUserId=${recipientUserId}
+    &recipientAcctNo=${recipientAcctNo}&amountToTransfer=${amountToTransfer}&transactionPin=${transactionPin}`, {})
+  }
+
+  getUserAccountNumber(accountNo:any):any{
+    return this.http.get(this.baseURL + accountNo);
+  }
 
 }

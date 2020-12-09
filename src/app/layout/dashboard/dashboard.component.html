@@ -98,8 +98,8 @@
             <div class="card-body">
                 <p class="fw-bold mt-1">My Balance</p>
                 <h4><b>&#8358; {{userBalance}}</b></h4>
-                <a href="#" class="btn btn-primary btn-full text-left mt-3 mb-3"><i class="fa fa-plus"></i> Add
-                Balance</a>
+                <a href="#" class="btn btn-primary btn-full text-left mt-3 mb-3" [routerLink]="['/deposit']" routerLinkActive="router-link-active"><i class="fa fa-plus"></i> Add
+                Balance  </a>
             </div>
             <div class="card-footer">
                 <ul class="nav">
@@ -170,8 +170,8 @@
                     </div>
                     <div class="col-7 d-flex align-items-center">
                         <div class="numbers">
-                            <p class="card-category">Number</p>
-                            <h4 class="card-title">150GB</h4>
+                            <p class="card-category">Referral Code</p>
+                            <h4 class="card-title">{{loggedInUser?.referralCode}}</h4>
                         </div>
                     </div>
                 </div>
