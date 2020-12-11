@@ -31,27 +31,31 @@
         </svg>
         &nbsp;&nbsp;Pay Securely
       </button>
+        <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" position="relative" type="ball-scale-multiple">
+            <p style="font-size: 20px; color: white; position: relative;">Loading...</p>
+
+        </ngx-spinner>
     </form>
 
 </div>
 
 
-<div class="table-responsive">
-    <table class="table table-hover mb-0 table-sm">
+<div class="table-responsive ">
+    <table class="table table-hover mb-0 table-sm ">
         <thead>
-            <tr class="align-self-center tableHead">
+            <tr class="align-self-center tableHead ">
                 <th>#</th>
-                <th scope="col">Date</th>
-                <th scope="col">Service</th>
-                <th scope="col">Description</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Charges</th>
-                <th scope="col">status</th>
+                <th scope="col ">Date</th>
+                <th scope="col ">Service</th>
+                <th scope="col ">Description</th>
+                <th scope="col ">Amount</th>
+                <th scope="col ">Charges</th>
+                <th scope="col ">status</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let list of WalletTransaction.slice().reverse();let i=index">
-                <th scope="row">{{i+1}}</th>
+            <tr *ngFor="let list of WalletTransaction.slice().reverse();let i=index ">
+                <th scope="row ">{{i+1}}</th>
                 <td>{{list.dateCreated | date}}</td>
                 <td>{{list.service}}</td>
                 <td>{{list.description}}</td>

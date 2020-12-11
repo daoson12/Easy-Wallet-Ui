@@ -4,6 +4,7 @@ import { CustomValidatorsService } from './../validator/custom-validators.servic
 import { SecurityServiceService } from './../service/security-service.service';
 import { SessionServiceService } from './../service/session-service.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  public loading = false;
   loginForm: any = FormGroup;
   submitted=false
-  constructor(private formBuilder:FormBuilder,private router:Router, private customValidator:CustomValidatorsService,private service:SecurityServiceService, private session:SessionServiceService) { }
+  constructor(private formBuilder:FormBuilder,private toastr: ToastrService,private router:Router, private customValidator:CustomValidatorsService,private service:SecurityServiceService, private session:SessionServiceService) { }
 
   ngOnInit() {
     this.loginForm=this.formBuilder.group({
@@ -27,6 +29,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.submitted = true;
+    this.loading=true;
     // stop here if form is invalid
     if (this.loginForm.invalid) {
         return;
@@ -37,8 +40,11 @@ export class LoginComponent implements OnInit {
       if (res.access_token) {
         this.session.setToken(res.access_token)
         this.authenticateAndGetUserRoles(this.loginForm.value);
+       
         setTimeout(() => {
+          this.loading=false;
           this.router.navigate(["/"])
+          this.toastr.success('Login Successful!');
          }, 3000);
     
       }
@@ -46,7 +52,9 @@ export class LoginComponent implements OnInit {
     (error: any) => {
 
       if (error.status === 401) {
-       console.log("invalid credential");
+      //  console.log("invalid credential");
+      this.loading=false;
+       this.toastr.error('invalid credential!');
       }
     }
   );
@@ -57,6 +65,7 @@ export class LoginComponent implements OnInit {
     this.service.authenticateAndGetUserRoles(value).subscribe(
         (res: any) => {
    console.log(res);
+   this.loading=false;
             this.session.setUser(res.data)
             this.session.setUserRole(res.data.roles)
         },
@@ -64,8 +73,9 @@ export class LoginComponent implements OnInit {
   
           if (error.status === 401) {
             console.log(error);
-            
+            this.loading=false;
            console.log("invalid crendicial");
+           this.toastr.error('invalid credential!');
            
           }
         }

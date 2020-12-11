@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidatorsService } from './../validator/custom-validators.service';
 import { SecurityServiceService } from './../service/security-service.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,8 +12,9 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
 registerForm:any=FormGroup;
+public loading = false;
 submitted=false;
-  constructor(private formBuilder:FormBuilder,private customValidator:CustomValidatorsService, private service:SecurityServiceService, private router:Router) { }
+  constructor(private formBuilder:FormBuilder,private customValidator:CustomValidatorsService, private service:SecurityServiceService, private router:Router,private toastr: ToastrService) { }
 
   ngOnInit() {
     this.registerForm=this.formBuilder.group({
@@ -31,17 +33,31 @@ submitted=false;
   get f() { return this.registerForm.controls; }
 
   register():any {
-    
+    this.loading=true;
     this.submitted=true;
     if(this.registerForm.invalid){
       return;
     }
     this.service.registerUser(this.registerForm.value).subscribe(result=>{
-      this.router.navigate(["/login"])
-      console.log(result)
+      console.log(result) 
      
+      if (result.response == 'Success') {
+        this.loading=false;
+        this.submitted = false;
+        this.toastr.success('User Signup was Successful', result.success);
+        this.router.navigate(["/login"])
+      }
+      
+      else {
+        error => {
+          this.loading=false;
+          this.submitted = false;
+          this.toastr.error('User Signup Failed', 'Failure');
+    
+        }
+      }
     },
-    err=>console.log(err)
+
     )
 
     }

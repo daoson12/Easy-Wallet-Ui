@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { WalletService } from './../wallet.service';
-
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-deposit',
   templateUrl: './deposit.component.html',
@@ -13,12 +14,14 @@ paymentMethod: any
 depositAmount: any
 pin: any
 WalletTransaction: any = [];
+  amount: any;
 
 
-constructor(private walletService: WalletService,) { }
+constructor(private walletService: WalletService,private toastr: ToastrService,private spinner: NgxSpinnerService) { }
 
   ngOnInit(){
    this.  getAllWithdrawalLogs()
+  //  this.spinner.show();
   }
 
   makeDeposit(){
@@ -29,7 +32,20 @@ constructor(private walletService: WalletService,) { }
     console.log(`PaymentMethod= ${paymentMethod} \n Amount= ${depositAmount} \n pin= ${transactionPin} \n UserId= ${userId}`);
 
     this.walletService.makeDeposit(paymentMethod, depositAmount, transactionPin,userId).subscribe((res:any)=>{
-    console.log(res);      
+    console.log(res);  
+    this.spinner.show();
+    if (res.response == "Success") {
+      
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+      this.toastr.success("", `You Deposited ${this.depositAmount} to your Account`)
+    }, 3000);
+      
+    } else {
+      this.spinner.hide();
+      this.toastr.error('', res.message)
+    }
     })
   }
   getAllWithdrawalLogs(){

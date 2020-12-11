@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletService } from './../wallet.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-withdrawal',
@@ -8,7 +9,7 @@ import { WalletService } from './../wallet.service';
 })
 export class WithdrawalComponent implements OnInit {
 
-  constructor(private walletService:WalletService) { }
+  constructor(private walletService:WalletService,private toastr: ToastrService) { }
   WalletTransaction:any=[];
   loggedInUser: any = JSON.parse(sessionStorage.getItem('loggedInUser') || '{}');
   amountToWithdraw: any;
@@ -27,6 +28,11 @@ withdrawal(){
   var userId= this.loggedInUser.id
   console.log(`PaymentMethod= ${paymentMethod} \nAmount= ${amountToWithdraw} \npin= ${transactionPin} \nUserId= ${userId}`);
   this.walletService.withdraw(paymentMethod, amountToWithdraw, transactionPin, userId).subscribe((res:any)=>{
+    if (res.message == "Success") {
+      this.toastr.success("", `You Withdraw ${this.amountToWithdraw} from your account`)
+    } else {
+      this.toastr.error('', res.message)
+    }
     console.log(res);
   })
 }

@@ -8,108 +8,116 @@
 
 <div class="container mb-4 main-container">
     <div class="row">
-        <div class="col-lg-4 pb-5 shadow">
-            <!-- Account Sidebar-->
-            <div class="card card-stats card-warning">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fa fa-users"></i>
+        <div class="col-lg-6 pb-5 shadow">
+            <div class="row">
+                <div class="col-lg-6 pb-5 shadow">
+                    <!-- Account Sidebar-->
+                    <div class="card card-stats card-warning">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-center">
+                                        <i class="fa fa-users"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7 d-flex align-items-center">
+                                    <div class="numbers">
+                                        <p class="card-category">Account Number</p>
+                                        <h4 class="card-title">{{userAccountNumber}}</h4>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">Account Number</p>
-                                <h4 class="card-title">{{userAccountNumber}}</h4>
+                    </div>
+                </div>
+                <div class="col-lg-6 pb-5 shadow">
+                    <div class="card card-stats card-success">
+                        <div class="card-body ">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="icon-big text-center">
+                                        <i class="fa fa-money"></i>
+                                    </div>
+                                </div>
+                                <div class="col-7 d-flex align-items-center">
+                                    <div class="numbers">
+                                        <p class="card-category">Balance</p>
+                                        <h4 class="card-title">&#8358;{{userBalance}}</h4>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="card card-stats card-success">
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-5">
-                            <div class="icon-big text-center">
-                                <i class="fa fa-money"></i>
-                            </div>
-                        </div>
-                        <div class="col-7 d-flex align-items-center">
-                            <div class="numbers">
-                                <p class="card-category">Balance</p>
-                                <h4 class="card-title">&#8358;{{userBalance}}</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
+        <div class="col-lg-6 pb-5 shadow">
 
         </div>
-        <!-- Orders Table-->
-        <div class="col-lg-8 pb-5">
-            <div class="card">
-                <div class="card-body">
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="main-box clearfix">
-                                <div class="table-responsive">
-                                    <table class="table user-list">
-                                        <thead>
-                                            <tr class="align-self-center tableHead">
-                                                <th><span>#</span></th>
-                                                <th><span>User</span></th>
-                                                <th><span>Date</span></th>
-                                                <th><span>Desription</span></th>
-                                                <th>Amount</th>
-                                                <th><span>Status</span></th>
-                                                <th>&nbsp;</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let list of WalletTransaction.slice().reverse() | paginate: { itemsPerPage: 5, currentPage: p };let i=index">
-                                                <td>
-                                                    {{i+1}}
-                                                </td>
-                                                <td>
-                                                    {{list.dateCreated }}
-                                                </td>
-                                                <td>
+    </div>
 
+    <div class="card">
+        <div class="card-body">
 
-                                                    <span class="user-subhead">Admin</span>
-                                                </td>
-
-                                                <td>
-                                                    {{list.description}}
-                                                </td>
-                                                <td>
-                                                    <span>{{list.amount}}</span>
-                                                </td>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main-box clearfix">
+                        <div class="table-responsive">
+                            <table class="table user-list">
+                                <thead>
+                                    <tr class="align-self-center tableHead">
+                                        <th><span>#</span></th>
+                                        <th><span>User</span></th>
+                                        <th><span>Date</span></th>
+                                        <th><span>Desription</span></th>
+                                        <th>Amount</th>
+                                        <th><span>Status</span></th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let list of WalletTransaction.slice().reverse() | paginate: { itemsPerPage: 5, currentPage: p };let i=index">
+                                        <td>
+                                            {{i+1}}
+                                        </td>
+                                        <td>
+                                            {{list.dateCreated | date:'medium'}}
+                                        </td>
+                                        <td>
 
 
-                                                <td style="width: 20%;">
-                                                    <span class="badge badge-secondary">{{list.status}}</span>
+                                            <span class="user-subhead">Admin</span>
+                                        </td>
 
-                                                </td>
-                                            </tr>
+                                        <td>
+                                            {{list.description}}
+                                        </td>
+                                        <td>
+                                            <span>{{list.amount}}</span>
+                                        </td>
 
-                                        </tbody>
 
-                                    </table>
-                                </div>
-                                <!-- Pagination -->
-                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                            </div>
+                                        <td style="width: 20%;">
+                                            <span class="badge badge-secondary">{{list.status}}</span>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
                         </div>
+                        <!-- Pagination -->
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     </div>
-                    <!--end table-responsive-->
-
                 </div>
             </div>
+            <!--end table-responsive-->
+
         </div>
     </div>
+
 </div>
